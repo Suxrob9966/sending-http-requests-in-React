@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 import MoviesList from "./components/MoviesList";
 import "./App.css";
@@ -24,7 +24,7 @@ function App() {
   const [error, setError] = useState(null);
 
   // ALTERNATIVE WAY OF THE BOTTOM WITH async await
-  async function fetchMoviesHandler() {
+  const fetchMoviesHandler = useCallback(async () => {
     try {
       setIsLoading(true);
       setError(null);
@@ -48,7 +48,12 @@ function App() {
       setError(error.message);
     }
     setIsLoading(false);
-  }
+  }, []);
+
+  useEffect(() => {
+    // to fetch movies upon loading the page only for the first time because we have empty array of dependencies
+    fetchMoviesHandler();
+  }, [fetchMoviesHandler]);
 
   let content = <p>Found no movies(</p>;
   if (movies.length > 0) {
