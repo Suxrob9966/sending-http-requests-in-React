@@ -40,6 +40,22 @@ function App() {
       });
   }
 
+  // ALTERNATIVE WAY OF THE ABOVE WITH async await
+  // async function fetchMoviesHandler() {
+  //   const response = await fetch("https://swapi.dev/api/films/");
+  //   const data = await response.json();
+  //   const transformedMovies = data.results.map((movieData) => {
+  //     return {
+  //       id: movieData.episode_id,
+  //       title: movieData.title,
+  //       openingText: movieData.opening_crawl,
+  //       releaseDate: movieData.release_date,
+  //     };
+  //   });
+  //   // store results of movies array in a state
+  //   setMovies(transformedMovies);
+  // }
+
   return (
     <React.Fragment>
       <section>
